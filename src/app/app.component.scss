@@ -1,0 +1,102 @@
+header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px 35px;
+    border-bottom: 2px solid #EE3D42;
+
+    @media screen and (max-width: 780px){
+        padding: 15px 20px;
+    }
+
+    .logo-company {
+        color: #003876;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: 300;
+
+        strong {
+            font-weight: 700;
+        }
+    }
+}
+
+section {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    &.title-app {
+        color: #001B3A;
+        margin: 30px 0;
+
+        h1 {
+            font-size: 30px;
+        }
+    }
+
+    &.filters {
+        margin-bottom: 35px;
+    }
+
+    &.data-table {
+        .container {
+            padding: 0;
+        }
+        .table-presentation {
+            display: table;
+            width: 100%;
+
+            .table-row {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+
+                @media screen and (max-width: 780px){
+                    flex-wrap: wrap;
+                }
+                
+                &.panel {
+                    margin-bottom: 20px;
+                }
+
+                &.titles {
+                    @media screen and (max-width: 780px){
+                        display: none;
+                    }
+                }
+
+                .table-cell {
+                    display: inline-block;
+                    padding: 12px;
+                    font-size: 14px;
+                    flex-basis: 14%;
+
+                    @media screen and (max-width: 780px){
+                        display: inline-block;
+                        flex-basis: 50%;
+                        padding: 10px;
+                    }
+
+                    .status-color {
+                        display: inline-block;
+                        width: 15px;
+                        height: 10px;
+                        background-color: #cccccc;
+                        margin-right: 5px;
+                        border-radius: 2px;
+                    }
+
+                    small {
+                        font-size: 10px;
+                        display: block;
+                        color: #001B3A;
+
+                        @media screen and (min-width: 780px){
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
