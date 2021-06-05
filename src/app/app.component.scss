@@ -67,7 +67,7 @@ section {
 
                 .table-cell {
                     display: inline-block;
-                    padding: 12px;
+                    padding: 6px 12px;
                     font-size: 14px;
                     flex-basis: 14%;
 
@@ -77,6 +77,10 @@ section {
                         padding: 10px;
                     }
 
+                    .no-display {
+                        display: none;
+                    }
+
                     .status-color {
                         display: inline-block;
                         width: 15px;
@@ -84,12 +88,25 @@ section {
                         background-color: #cccccc;
                         margin-right: 5px;
                         border-radius: 2px;
+
+                        &.green {
+                            background-color: #7AC844;
+                        }
+
+                        &.yellow {
+                            background-color: #FBB03B;
+                        }
+
+                        &.red {
+                            background-color: #EE3D42;
+                        }
                     }
 
                     small {
                         font-size: 10px;
                         display: block;
-                        color: #001B3A;
+                        color: #999999;
+                        text-transform: uppercase;
 
                         @media screen and (min-width: 780px){
                             display: none;

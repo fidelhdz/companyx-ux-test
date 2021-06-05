@@ -38,134 +38,39 @@
             <div class="table-cell">Date Requested</div>
           </div>
           <!-- END ROW TITLES -->
-          <!-- CONTENT TABLE -->
-          <div class="table-row panel">
-            <div class="table-cell">
-              <small>Status</small>
-              <span class="status-color"></span> Confirmed
-            </div>
-            <div class="table-cell">
-              <small>Order</small>
-              99820959
-            </div>
-            <div class="table-cell">
-              <small>Purchase Order</small>
-              7755-KJ120/00011
-            </div>
-            <div class="table-cell">
-              <small>Product Line</small>
-              Bulk Cement
-            </div>
-            <div class="table-cell">
-              <small>Quantity</small>
-              3
-            </div>
-            <div class="table-cell">
-              <small>Date Submitted</small>
-              Sep 24, 2020 9:38 AM
-            </div>
-            <div class="table-cell">
-              <small>Date Requested</small>
-              Sep 23, 2020 4:56 PM
-            </div>
-          </div>
-          <!-- END CONTENT TABLE -->
 
           <!-- CONTENT TABLE -->
-          <div class="table-row panel">
-            <div class="table-cell">
+          <div class="table-row panel" *ngFor="let order of orders; let i = index;">
+            <div class="table-cell" [attr.data-jobsite]="order.jobSite">
               <small>Status</small>
-              <span class="status-color"></span> On Hold
+              <span class="status-color"
+                    [class.green]="order.status === 'Confirmed'"
+                    [class.yellow]="order.status === 'On Hold'"
+                    [class.red]="order.status === 'Blocked'"></span> {{ order.status }}
             </div>
             <div class="table-cell">
               <small>Order</small>
-              99820959
+              {{ order.order }}
             </div>
             <div class="table-cell">
               <small>Purchase Order</small>
-              7755-KJ120/00011
+              {{ order.purchaseOrder }}
             </div>
             <div class="table-cell">
               <small>Product Line</small>
-              Bulk Cement
+              {{ order.productLine }}
             </div>
             <div class="table-cell">
               <small>Quantity</small>
-              3
+              {{ order.quantity }}
             </div>
             <div class="table-cell">
               <small>Date Submitted</small>
-              Sep 24, 2020 9:38 AM
+              {{ order.dateSubmitted }}
             </div>
             <div class="table-cell">
               <small>Date Requested</small>
-              Sep 23, 2020 4:56 PM
-            </div>
-          </div>
-          <!-- END CONTENT TABLE -->
-
-          <!-- CONTENT TABLE -->
-          <div class="table-row panel">
-            <div class="table-cell">
-              <small>Status</small>
-              <span class="status-color"></span> Blocked
-            </div>
-            <div class="table-cell">
-              <small>Order</small>
-              99820959
-            </div>
-            <div class="table-cell">
-              <small>Purchase Order</small>
-              7755-KJ120/00011
-            </div>
-            <div class="table-cell">
-              <small>Product Line</small>
-              Bulk Cement
-            </div>
-            <div class="table-cell">
-              <small>Quantity</small>
-              3
-            </div>
-            <div class="table-cell">
-              <small>Date Submitted</small>
-              Sep 24, 2020 9:38 AM
-            </div>
-            <div class="table-cell">
-              <small>Date Requested</small>
-              Sep 23, 2020 4:56 PM
-            </div>
-          </div>
-          <!-- END CONTENT TABLE -->
-
-          <!-- CONTENT TABLE -->
-          <div class="table-row panel">
-            <div class="table-cell">
-              <small>Status</small>
-              <span class="status-color"></span> Confirmed
-            </div>
-            <div class="table-cell">
-              <small>Order</small>
-              99820959
-            </div>
-            <div class="table-cell">
-              <small>Purchase Order</small>
-              7755-KJ120/00011
-            </div>
-            <div class="table-cell">
-              <small>Product Line</small>
-              Bulk Cement
-            </div>
-            <div class="table-cell">
-              <small>Quantity</small>
-              3
-            </div>
-            <div class="table-cell">
-              <small>Date Submitted</small>
-              Sep 24, 2020 9:38 AM
-            </div>
-            <div class="table-cell">
-              <small>Date Requested</small>
-              Sep 23, 2020 4:56 PM
+              {{ order.dateRequested }}
             </div>
           </div>
           <!-- END CONTENT TABLE -->
