@@ -1,0 +1,13 @@
+<section class="counting-status">
+    <div class="container">
+      <div class="items-list">
+        <div class="element" *ngFor="let item of ordersCounted"
+            [class.confirmed]="item[0] === 'Confirmed'"
+            [class.on-hold]="item[0] === 'On Hold'"
+            [class.blocked]="item[0] === 'Blocked'">
+          <div class="status-name">{{ item[0] }}</div>
+          <div class="status-elements">{{ item[1] }}</div>
+        </div>
+      </div>
+    </div>
+  </section>

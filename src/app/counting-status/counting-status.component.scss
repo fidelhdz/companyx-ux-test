@@ -1,0 +1,41 @@
+section {
+    &.counting-status {
+        padding: 20px 0 40px 0;
+
+        .items-list {
+            display: flex;
+            justify-content: flex-end;
+
+            .element {
+                width: 120px;
+                border: none;
+                padding: 5px;
+                text-align: center;
+                margin: 0 10px;
+                border-radius: 4px;
+                background-color: var(--no-flag);
+
+                &.confirmed {
+                    background-color: var(--green-flag);
+                }
+                &.on-hold {
+                    background-color: var(--yellow-flag);
+                }
+                &.blocked {
+                    background-color: var(--red-flag);
+                }
+
+                .status-name {
+                    text-transform: uppercase;
+                    font-size: 9px;
+                    color: #001B3A88;
+                }
+                .status-elements {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #00000088;
+                }
+            }
+        }
+    }
+}

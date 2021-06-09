@@ -19,3 +19,10 @@ body {
   border-radius: 4px;
   color: #2A2B2C;
 }
+
+:root {
+  --green-flag: rgba(122, 200, 68, 0.7);
+  --yellow-flag: rgba(251, 176, 59, 0.7);
+  --red-flag: rgba(238, 61, 66, 0.7);
+  --no-flag: rgba(204, 204, 204, 0.7);
+}

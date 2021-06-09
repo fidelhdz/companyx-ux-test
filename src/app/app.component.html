@@ -16,11 +16,26 @@
   <div class="container">
     <div class="row">
       <div class="col-12 panel">
-        Filters
+        <div class="row">
+          <div class="col-md-2 jobsites-area">
+            <small class="small-on-filters">Jobsites</small>
+            <div class="btn-group">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Select an option
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li *ngFor="let jobsite of jobsites_list"><a class="dropdown-item" (click)="filter_jobsites(jobsite);" href="#">{{ jobsite }}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CONTADOR DE ESTATUS -->
+<app-counting-status [ordersCounted]="lista_status"></app-counting-status>
 
 <section class="data-table">
   <div class="container">
@@ -40,7 +55,7 @@
           <!-- END ROW TITLES -->
 
           <!-- CONTENT TABLE -->
-          <div class="table-row panel" *ngFor="let order of orders; let i = index;">
+          <div class="table-row panel" *ngFor="let order of orders2Show | filter: filteredLocations: 'jobSite'">
             <div class="table-cell" [attr.data-jobsite]="order.jobSite">
               <small>Status</small>
               <span class="status-color"
@@ -52,7 +67,7 @@
               <small>Order</small>
               {{ order.order }}
             </div>
-            <div class="table-cell">
+            <div class="table-cell important-data">
               <small>Purchase Order</small>
               {{ order.purchaseOrder }}
             </div>

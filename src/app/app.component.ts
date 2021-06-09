@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Orders } from './models/orders.model';
+import { FilterPipe } from './filter.pipe';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'neoris-ux-test';
+  filteredLocations: any = [];
+  lista_status: any = [];
+  jobsites_list: any = [];
+  orders2Show: any = [];
+
   orders:Orders[] = [
     new Orders('First Avenue', 'Confirmed', 99820959, '775-KJ120/00011', 'Bulk Cement', 3, 'Sep 24, 2020 9:38 AM', 'Sep 23, 2020 4:56 PM'),
     new Orders('Centenial Mall', 'On Hold', 7543189, '775-KJ120/00012', 'Ready Mix', 1, 'Sep 21, 2020 3:20 AM', 'Sep 21, 2020 1:12 AM'),
@@ -17,4 +23,48 @@ export class AppComponent {
     new Orders('Rapid Parks', 'Confirmed', 5736237, '775-KJ120/00020', 'Aggregates', 1, 'Sep 8, 2020 8:00 AM', 'Sep 4, 2020 7:24 AM'),
     new Orders('Centenial Mall', 'Confirmed', 5736245, '775-KJ120/00076', 'Aggregates', 1, 'Sep 3, 2020 6:55 PM', 'Sep 1, 2020 7:13 PM')
   ];
+
+  ngOnInit() {
+    this.count_Elements();
+    this.get_jobsitesList();
+    this.orders2Show = this.orders;
+  }
+
+  get_jobsitesList() {
+    for (let i = 0; i < this.orders.length; i++ ) {
+      let jobSite: string = this.orders[i].jobSite;
+
+      if ( this.jobsites_list.indexOf(jobSite) === -1 ){
+        this.jobsites_list.push( jobSite );
+      }
+    }
+  }
+
+  filter_jobsites( jobS: string ) {
+    let indexLocation = this.jobsites_list.indexOf(jobS);
+    
+    if (indexLocation >= 0) {
+      this.filteredLocations = this.orders2Show.filter((i:any) => i.jobSite === jobS);
+    }
+  }
+
+  count_Elements() {
+    let order_status: any = {};
+
+    for (let i = 0; i < this.orders.length; i++ ) {
+      let status: string = this.orders[i].status;
+      
+      if ( status in order_status ) {
+        ++order_status[status];
+      } else {
+        order_status[status] = 1;
+      }
+    }
+
+    for ( const obj in order_status ) {
+      if ( order_status.hasOwnProperty( obj ) ) {
+        this.lista_status.push( [ obj, order_status[obj] ] );
+      }
+    }
+  }
 }

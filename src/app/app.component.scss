@@ -35,6 +35,39 @@ section {
 
     &.filters {
         margin-bottom: 35px;
+
+        .panel {
+
+            .jobsites-area {
+                @media screen and (min-width: 780px){
+                    border-right: 1px solid #ccc;
+                }
+            }
+
+            .small-on-filters {
+                font-size: 9px;
+                color: #001B3A;
+                display: block;
+            }
+            .dropdown-toggle {
+                font-size: 14px;
+                outline: none;
+                box-shadow: none;
+                color: #212121;
+            }
+
+            ul.dropdown-menu {
+                border: none;
+                border-top: 3px solid #49ADF6;
+                box-shadow: rgba(0,0,0,0.1) 0px 3px 6px;
+                border-radius: 0;
+
+                li {
+                    font-size: 14px;
+                    color: #212121;
+                }
+            }
+        }
     }
 
     &.data-table {
@@ -77,6 +110,15 @@ section {
                         padding: 10px;
                     }
 
+                    &.important-data {
+                        @media screen and (max-width: 780px){
+                            display: block;
+                            flex-basis: 100%;
+                            font-size: 28px;
+                            padding: 10px;
+                        }
+                    }
+
                     .no-display {
                         display: none;
                     }
@@ -90,15 +132,15 @@ section {
                         border-radius: 2px;
 
                         &.green {
-                            background-color: #7AC844;
+                            background-color: var(--green-flag);
                         }
 
                         &.yellow {
-                            background-color: #FBB03B;
+                            background-color: var(--yellow-flag);
                         }
 
                         &.red {
-                            background-color: #EE3D42;
+                            background-color: var(--red-flag);
                         }
                     }
 
