@@ -8,11 +8,36 @@ import { FilterPipe } from './filter.pipe';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'neoris-ux-test';
+  title = 'Orders';
   filteredLocations: any = [];
   lista_status: any = [];
   jobsites_list: any = [];
+  productLine_list: any = [];
+  statuses_list: any = [];
   orders2Show: any = [];
+
+  data_views: any = [
+    {
+      item: 'Default (unfiltered)',
+      show: true,
+      removable: false
+    },
+    {
+      item: 'Bulk Confirmed',
+      show: true,
+      removable: true
+    },
+    {
+      item: 'Confirmed One',
+      show: true,
+      removable: true
+    },
+    {
+      item: 'Confirmados Hold',
+      show: true,
+      removable: true
+    }
+  ];
 
   orders:Orders[] = [
     new Orders('First Avenue', 'Confirmed', 99820959, '775-KJ120/00011', 'Bulk Cement', 3, 'Sep 24, 2020 9:38 AM', 'Sep 23, 2020 4:56 PM'),
@@ -27,6 +52,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.count_Elements();
     this.get_jobsitesList();
+    this.get_productLineList();
+    this.get_statusesList();
     this.orders2Show = this.orders;
   }
 
@@ -38,6 +65,31 @@ export class AppComponent implements OnInit {
         this.jobsites_list.push( jobSite );
       }
     }
+  }
+
+  get_productLineList() {
+    for (let i = 0; i < this.orders.length; i++ ) {
+      let productLine: string = this.orders[i].productLine;
+
+      if ( this.productLine_list.indexOf(productLine) === -1 ){
+        this.productLine_list.push( productLine );
+      }
+    }
+  }
+
+  get_statusesList() {
+    for (let i = 0; i < this.orders.length; i++ ) {
+      let status: string = this.orders[i].status;
+
+      if ( this.statuses_list.indexOf(status) === -1 ){
+        this.statuses_list.push( status );
+      }
+    }
+  }
+
+  remove_arrayElement(arr: any, pos: number, name_array?: string) {
+    console.log(arr, pos, name_array);
+    arr.splice(pos, 1);
   }
 
   filter_jobsites( jobS: string ) {

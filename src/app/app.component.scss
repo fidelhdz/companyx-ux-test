@@ -38,9 +38,76 @@ section {
 
         .panel {
 
-            .jobsites-area {
+            .filters-control {
+                font-size: 14px;
+                
                 @media screen and (min-width: 780px){
                     border-right: 1px solid #ccc;
+                }
+
+                &:last-child {
+                    @media screen and (min-width: 780px){
+                        border-right: none;
+                    }
+                }
+
+                &.data-views {
+                    font-size: 14px;
+
+                    li {
+                        position: relative;
+
+                        a {
+                            padding-right: 70px;
+                        }
+
+                        .add-new {
+                            color: var(--blue-decoration);
+                            padding-right: 1rem;
+                        }
+    
+                        .trash-button {
+                            position: absolute;
+                            right: 1rem;
+                            color: var(--blue-decoration);
+                            background-color: #ffffff;
+                            padding: 5px;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+
+                &.search-box {
+                    padding: 5px 20px;
+
+                    .input-group {
+                        position: relative;
+
+                        input {
+                            width: 80%;
+                            padding: 5px;
+                            font-size: 14px;
+                            box-shadow: none;
+                        }
+
+                        button.btn {
+                            right: 0;
+                            position: absolute;
+                            z-index: 9;
+                            font-size: 14px;
+                            color: var(--blue-decoration);
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                &.more-filters {
+                    a.btn {
+                        padding: 10px;
+                        color: var(--blue-decoration);
+                        border: none;
+                        box-shadow: none;
+                    }
                 }
             }
 
@@ -58,7 +125,7 @@ section {
 
             ul.dropdown-menu {
                 border: none;
-                border-top: 3px solid #49ADF6;
+                border-top: 3px solid var(--blue-decoration);
                 box-shadow: rgba(0,0,0,0.1) 0px 3px 6px;
                 border-radius: 0;
 
@@ -155,6 +222,50 @@ section {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+#filtersModal {
+    .modal-title {
+        color: #001B3A;
+    }
+    .modal-content {
+        border: none;
+        border-radius: 0;
+        padding: 0 14px;
+
+        form {
+            label {
+                font-size: 10px;
+                color: #001B3A;
+            }
+
+            select {
+                font-size: 14px;
+                box-shadow: none;
+            }
+
+            input {
+                @extend select;
+                box-shadow: none;
+            }
+        }
+    }
+    .modal-footer {
+        .btn {
+            font-size: 14px;
+            box-shadow: none;
+
+            &.btn-filters {
+                background-color: var(--green-flag);
+                color: #ffffff;
+                border-radius: 0;
+            }
+
+            &.btn-clear {
+                color: var(--blue-decoration);
             }
         }
     }
