@@ -1,35 +1,37 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filter',
-  pure: false
+    name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: any, filterStrings: any, propName: any): any {
-    if (!filterStrings || filterStrings.length === 0) {
-      return value;
-    }
-    
-    console.group('++++ GRUPO');
-    console.log(value);
-    console.log(filterStrings);
-    console.log(propName);
-    console.groupEnd();
+    transform(value: any, filterStrings: any, propName: any): any {
+        if (!filterStrings || filterStrings.length === 0) {
+            return value;
+        }
 
-    let resultArray = [];
-    
-    if (filterStrings === undefined || filterStrings === '' || value.length == 0) {
-      resultArray = value;
-    }
-    
-    for (const item of value) {
-      if(item[propName] === filterStrings){
-        resultArray.push(item);
-      }          
-    }
+        // Console para comprobar que filtre los datos
+        console.group('++++ GRUPO');
+        console.log(filterStrings);
+        console.log(propName);
+        console.groupEnd();
 
-    return resultArray;
-  }
+        let resultArray = [];
+
+        if (filterStrings === undefined || filterStrings === '') {
+            resultArray = value;
+        }
+
+        for (const item of value) {
+            if (item[propName] === filterStrings) {
+                resultArray.push(item);
+            }
+        }
+
+        // Desabilitado temporalmente por no reflejar resultados en pantalla
+        // return resultArray;
+
+        return value;
+    }
 
 }

@@ -2,28 +2,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 * {
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: #F4F6F9;
+    background-color: #F4F6F9;
 }
 
 .panel {
-  background-color: #ffffff;
-  padding: 10px;
-  box-shadow: rgba(0,0,0,0.1) 0px 3px 6px;
-  border-radius: 4px;
-  color: #2A2B2C;
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: rgba(0,0,0,0.1) 0px 3px 6px;
+    border-radius: 4px;
+    color: #2A2B2C;
 }
 
 :root {
-  --green-flag: rgba(122, 200, 68, 0.7);
-  --yellow-flag: rgba(251, 176, 59, 0.7);
-  --red-flag: rgba(238, 61, 66, 0.7);
-  --no-flag: rgba(204, 204, 204, 0.7);
-  --blue-decoration: #49ADF6;
+    --green-flag: rgba(122, 200, 68, 0.7);
+    --yellow-flag: rgba(251, 176, 59, 0.7);
+    --red-flag: rgba(238, 61, 66, 0.7);
+    --no-flag: rgba(204, 204, 204, 0.7);
+    --blue-decoration: #49ADF6;
 }
