@@ -19,13 +19,10 @@ export class AppComponent implements OnInit {
     statuses_list: any = [];
     // Array para vaciar datos de array de ordenes y no alterar el original
     orders2Show: any = [];
-
     // Array para la lista de filtros
     filters_list: any = [];
-
     // Conocer si existen filtros o no
     existFilters: boolean = false;
-
     // Tipo de filtro
     filter_type: string = '';
 
@@ -117,8 +114,10 @@ export class AppComponent implements OnInit {
     }
 
     // Filtrado por jobSites
-    filter_jobsites(jobS: string, multiply: boolean = false) {
-        let indexLocation = this.jobsites_list.indexOf(jobS);
+    // @param type: String de búsqueda
+    // @param multiply: Si aplica en busqueda múltiple. Falso como valor default
+    filter_jobsites(type: string, multiply: boolean = false) {
+        let indexLocation = this.jobsites_list.indexOf(type);
 
         if ( !multiply ) {
             this.reset_Array();
@@ -126,11 +125,13 @@ export class AppComponent implements OnInit {
 
         this.filter_type = 'jobSite';
         if (indexLocation >= 0) {
-            this.orders2Show = this.orders2Show.filter((i: any) => i.jobSite === jobS);
+            this.orders2Show = this.orders2Show.filter((i: any) => i.jobSite === type);
         }
     }
 
     // Filtrado por Order ID
+    // @param type: String de búsqueda
+    // @param multiply: Si aplica en busqueda múltiple. Falso como valor default
     filter_orderID(type: string, multiply: boolean = false) {
         this.filter_type = 'order';
 
@@ -143,6 +144,8 @@ export class AppComponent implements OnInit {
     }
 
     // Filtrado por Status
+    // @param type: String de búsqueda
+    // @param multiply: Si aplica en busqueda múltiple. Falso como valor default
     filter_status(type: string, multiply: boolean = false) {
         this.filter_type = 'status';
 
@@ -153,6 +156,8 @@ export class AppComponent implements OnInit {
     }
 
     // Filtrado por Cantidad
+    // @param type: String de búsqueda
+    // @param multiply: Si aplica en busqueda múltiple. Falso como valor default
     filter_quantity(type: string, multiply: boolean = false) {
         this.filter_type = 'quantity';
 
@@ -163,6 +168,8 @@ export class AppComponent implements OnInit {
     }
 
     // Filtrado por Cantidad
+    // @param type: String de búsqueda
+    // @param multiply: Si aplica en busqueda múltiple. Falso como valor default
     filter_purchaseOrder(type: string, multiply: boolean = false) {
         this.filter_type = 'purchaseOrder';
 
@@ -206,6 +213,7 @@ export class AppComponent implements OnInit {
         
     }
 
+    // Reseteo de Forma
     clear_form() {
         let form: any = ( document.querySelector('#modalFiltersForm'));
 
