@@ -28,10 +28,7 @@ export class FilterPipe implements PipeTransform {
             }
         }
 
-        // Desabilitado temporalmente por no reflejar resultados en pantalla
-        // return resultArray;
-
-        return value;
+        return resultArray;
     }
 
 }

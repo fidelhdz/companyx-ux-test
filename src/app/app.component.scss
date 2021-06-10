@@ -137,6 +137,31 @@ section {
         }
     }
 
+    &.filters-selected {
+        .clear-filters {
+            color: var(--blue-decoration);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .filters {
+            .filter {
+                background-color: #dddddd;
+                border-radius: 4px;
+                padding: 5px;
+                font-size: 12px;
+                margin-right: 10px;
+
+                span {
+                    font-size: 13px;
+                    color: var(--blue-decoration);
+                    margin-left: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     &.data-table {
         .container {
             padding: 0;
@@ -144,6 +169,12 @@ section {
         .table-presentation {
             display: table;
             width: 100%;
+
+            &.no-data {
+                h3 {
+                    color: #cccccc;
+                }
+            }
 
             .table-row {
                 display: flex;

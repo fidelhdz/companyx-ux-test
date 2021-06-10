@@ -23,13 +23,14 @@
                     <div class="col-md-2 col-xs-6 jobsites-area filters-control">
                         <small class="small-on-filters">Jobsites</small>
                         <div class="btn-group">
-                            <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <button class="btn dropdown-toggle" #JSSelected type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Select an option
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" (click)="filter_jobsites(''); JSSelected.innerText = 'Select an option';" href="#">Clear this filter</a></li>
                                 <li *ngFor="let jobsite of jobsites_list"><a class="dropdown-item"
-                                        (click)="filter_jobsites(jobsite);" href="#">{{ jobsite }}</a></li>
+                                        (click)="filter_jobsites(jobsite); JSSelected.innerText = jobsite;" href="#">{{ jobsite }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -60,9 +61,9 @@
                     <div class="col-md-2 col-xs-6 search-box filters-control">
                         <form class="">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Order ID"
+                                <input type="text" class="form-control" #searchOrder placeholder="Enter Order ID"
                                     aria-label="Enter Order ID" aria-describedby="button-addon2">
-                                <button class="btn" type="button" id="button-addon2">Search</button>
+                                <button class="btn" type="button" (click)="filter_orderID(searchOrder.value);" id="button-addon2">Search</button>
                             </div>
                         </form>
                     </div>
@@ -78,6 +79,22 @@
     </div>
 </section>
 
+<!-- FILTROS SELECCIONADOS -->
+<section class="filters-selected no-visible">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 order-md-last">
+                <a href="#" (click)="clear_filters();" class="clear-filters">Clear Filters</a>
+            </div>
+            <div class="col-md-11">
+                <div class="filters d-flex">
+                    <div class="filter" *ngFor="let filter of filters_list; let i = index;">{{ filter.type }}: {{ filter.name }} <span class="remove-filter" (click)="remove_arrayElement(filters_list, i, 'filters_array');">&times;</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CONTADOR DE ESTATUS -->
 <app-counting-status [ordersCounted]="lista_status"></app-counting-status>
 
@@ -86,7 +103,7 @@
     <div class="container">
 
         <!-- TABLE -->
-        <div class="table-presentation">
+        <div class="table-presentation" *ngIf="orders2Show.length > 0">
             <!-- ROW TITLES (will dissapear on mobile version) -->
             <div class="table-row titles">
                 <div class="table-cell">Status</div>
@@ -100,7 +117,7 @@
             <!-- END ROW TITLES -->
 
             <!-- CONTENT TABLE -->
-            <div class="table-row panel" *ngFor="let order of orders2Show | filter: filteredLocations: 'jobSite'">
+            <div class="table-row panel" *ngFor="let order of orders2Show | filter: filteredLocations: filter_type">
                 <div class="table-cell" [attr.data-jobsite]="order.jobSite">
                     <small>Status</small>
                     <span class="status-color" [class.green]="order.status === 'Confirmed'"
@@ -135,6 +152,11 @@
             <!-- END CONTENT TABLE -->
         </div>
 
+        <!-- IF DATA NOT AVAILABLE -->
+        <div class="table-presentation no-data" *ngIf="orders2Show.length <= 0">
+            <h3 class="text-center">No data available</h3>
+        </div>
+
         <!-- END TABLE -->
     </div>
 </section>
@@ -149,20 +171,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form name="modalFilters" id="modalFiltersForm" #modalFiltersForm>
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="jobsites-text">Jobsites</label>
-                            <select class="form-select">
-                                <option selected>Select Jobsite</option>
+                            <select class="form-select" id="jobsites-select">
+                                <option value="-" selected>Select Jobsite</option>
                                 <option *ngFor="let jobsite of jobsites_list" value="{{ jobsite }}">{{ jobsite }}
                                 </option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="jobsites-text">Product Line</label>
-                            <select class="form-select">
-                                <option selected>Select Product Line</option>
+                            <select class="form-select" id="product-line-select">
+                                <option value="-" selected>Select Product Line</option>
                                 <option *ngFor="let product of productLine_list" value="{{ product }}">{{ product }}
                                 </option>
                             </select>
@@ -172,43 +194,46 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="jobsites-text">Statuses</label>
-                            <select class="form-select">
-                                <option selected>Select Statuses</option>
+                            <select class="form-select" id="statuses-select">
+                                <option value="-" selected>Select Statuses</option>
                                 <option *ngFor="let status of statuses_list" value="{{ status }}">{{ status }}</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="jobsites-text">Quantity</label>
-                            <input type="number" value="0" min="0" class="form-control">
+                            <input type="number" name="" id="quantity" value="0" min="0" class="form-control">
                         </div>
                     </div>
 
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="jobsites-text">Order Number</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="" id="order-number" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="jobsites-text">Purchase Order</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="" id="purchase-order" class="form-control">
                         </div>
                     </div>
 
                     <div class="row mb-5">
                         <div class="col-md-12">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" id="as-view" (click)="setDataViewName(); namingView.value = ''; namingView.focus();">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Save filtering criteria as <strong>Data View</strong>
                                 </label>
+                            </div>
+                            <div id="set-dv-name" class="no-visible">
+                                <input type="text" name="" id="naming-view" #namingView value="" placeholder="Name View" class="form-control">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-clear" data-bs-dismiss="modal">Clear Filters</button>
-                <button type="button" class="btn btn-filters">Apply Filters</button>
+                <button type="button" (click)="clear_form();" class="btn btn-clear">Clear Filters</button>
+                <button type="button" class="btn btn-filters" (click)="add_filters();" data-bs-dismiss="modal">Apply Filters</button>
             </div>
         </div>
     </div>

@@ -20,6 +20,10 @@ body {
     color: #2A2B2C;
 }
 
+.no-visible {
+    display: none;
+}
+
 :root {
     --green-flag: rgba(122, 200, 68, 0.7);
     --yellow-flag: rgba(251, 176, 59, 0.7);
